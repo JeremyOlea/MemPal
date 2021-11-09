@@ -5,10 +5,12 @@
 
 .sidebar {
     height: 100vh;
-    background-color: #c4ced8;
     position: -webkit-sticky; /* for safari browser */
     position: sticky;
     top: 0;
-    min-width: 100px;
+    min-width: 300px;
+    max-width: 300px;
+    border-right: 1px solid;
+    margin-right: 10px;
 }
   
