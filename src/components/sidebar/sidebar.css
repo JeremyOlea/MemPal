@@ -1,0 +1,36 @@
+.sidebar {
+    height: 100vh;
+    position: -webkit-sticky; /* for safari browser */
+    position: sticky;
+    top: 0;
+    min-width: 290px;
+    max-width: 290px;
+    border-right: 1px solid;
+    margin-right: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.sidebar-flex-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.profile-area {
+    background-color: aqua;
+    text-align: center;
+    margin-top: 10px;
+    height: 60px;
+}
+
+.search-area {
+    background-color: bisque;
+    text-align: center;
+    height: 35px;
+}
+
+.document-area {
+    background-color: blueviolet;
+    flex: 1;
+}
