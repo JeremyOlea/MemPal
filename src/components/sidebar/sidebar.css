@@ -31,6 +31,20 @@
 }
 
 .document-area {
+    padding-top: 10px;
     background-color: blueviolet;
     flex: 1;
+}
+
+.folder {
+    display: flex;
+    align-items: center;
+}
+
+.folder-wrapper {
+    padding-left: 20px;
+}
+
+.tree {
+    line-height: 1.5;
 }
