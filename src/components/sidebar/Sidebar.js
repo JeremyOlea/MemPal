@@ -12,9 +12,9 @@ class Sidebar extends Component {
                     <div className='search-area'> Search Area </div>
                     <div className='document-area'>
                         <Tree>
-                            <Folder name='this is section'>
-                                <Folder name='other folder'>
-                                    Hello
+                            <Folder name='Folder 1'>
+                                <Folder name='Folder 2'>
+                                    <Folder name='Folder 3'></Folder>
                                 </Folder>
                             </Folder>
                         </Tree>
