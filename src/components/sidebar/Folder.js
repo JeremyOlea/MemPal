@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FiChevronRight, FiChevronDown} from "react-icons/fi"
 
 export class Folder extends Component {
     state = {
@@ -14,6 +15,7 @@ export class Folder extends Component {
         return (
             <div className='folder-wrapper'>
                 <div className='folder'>
+                    {this.state.isOpen ? <FiChevronDown/> : <FiChevronRight/>}
                     <span onClick={() => this.setIsOpen(!this.state.isOpen)} >{this.props.name}</span>
                 </div>
                 <div className={this.state.isOpen ? 'collapsible open' : 'collapsible closed'}>
