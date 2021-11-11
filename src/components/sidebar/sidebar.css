@@ -18,21 +18,21 @@
 }
 
 .profile-area {
-    background-color: aqua;
     text-align: center;
     margin-top: 10px;
     height: 60px;
+    border: 1px solid;
 }
 
 .search-area {
-    background-color: bisque;
     text-align: center;
     height: 35px;
+    border: 1px solid;
 }
 
 .document-area {
     padding-top: 10px;
-    background-color: blueviolet;
+    border: 1px solid;
     flex: 1;
 }
 
