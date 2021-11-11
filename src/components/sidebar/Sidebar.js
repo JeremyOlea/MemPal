@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Folder from './Folder'
 import './sidebar.css'
 import Tree from './Tree'
+import Document from './Document'
 
 class Sidebar extends Component {
     render() {
@@ -11,10 +12,20 @@ class Sidebar extends Component {
                     <div className='profile-area'> User Profile </div>
                     <div className='search-area'> Search Area </div>
                     <div className='document-area'>
-                        <Tree>
-                            <Folder name='Folder 1'>
-                                <Folder name='Folder 2'>
-                                    <Folder name='Folder 3'></Folder>
+                        <Tree className='tree'>
+                            <Folder name='Classes'>
+                                <Folder name='Data Structures & Algorithms'>
+                                    <Document name='Lecture 1'/>
+                                    <Document name='Lecture 2'/>
+                                    <Document name='Lecture 3'/>
+                                </Folder>
+                            </Folder>
+                            <Folder name='Software Requirements'>
+                                <Document name='Lecture 1'/>
+                                <Document name='Lecture 2'/>
+                                <Document name='Lecture 3'/>
+                                <Folder name='Another Folder'>
+                                    <Document name='Lecture 3'/>
                                 </Folder>
                             </Folder>
                         </Tree>

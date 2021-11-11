@@ -48,3 +48,20 @@
 .tree {
     line-height: 1.5;
 }
+
+.document {
+    padding-left: 20px;
+    overflow: hidden;
+}
+
+.collapsible {
+    overflow: hidden;
+}
+
+.collapsible .closed {
+    height: 0px;
+}
+
+.collapsible .open {
+    height: auto;
+}
