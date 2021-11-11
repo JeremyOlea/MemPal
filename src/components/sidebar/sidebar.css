@@ -39,6 +39,7 @@
 .folder {
     display: flex;
     align-items: center;
+    /* TODO: MAKE IT NOT WRAP */
 }
 
 .folder-wrapper {
@@ -58,10 +59,10 @@
     overflow: hidden;
 }
 
-.collapsible .closed {
+.closed {
     height: 0px;
 }
 
-.collapsible .open {
+.open {
     height: auto;
 }
