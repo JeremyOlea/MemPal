@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import Folder from './Folder'
 import './sidebar.css'
 import Tree from './Tree'
-import Document from './Document'
 
 class Sidebar extends Component {
     state = {
@@ -20,42 +18,75 @@ class Sidebar extends Component {
                     <div className='profile-area'> User Profile </div>
                     <div className='search-area'> Search Area </div>
                     <div className='document-area'>
-                        <Tree className='tree'>
-                            <Folder name='Classes'>
-                                <Folder name='Data Structures & Algorithms'>
-                                    <Document name='Lecture 1' id={1} 
-                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-
-                                    <Document name='Lecture 2' id={2} 
-                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-
-                                    <Document name='Lecture 3' id={3} 
-                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-
-                                </Folder>
-                                <Folder name='Software Requirements'>
-                                    <Folder name='Lectures'>
-                                        <Document name='Lecture 1' id={4}
-                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-
-                                        <Document name='Lecture 2' id={5}
-                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-
-                                        <Document name='Lecture 3' id={6}
-                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-                                    </Folder>
-                                    <Folder name='Assignments'>
-                                        <Document name='Assignment 1' id={7}
-                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
-                                    </Folder>
-                                </Folder>
-                            </Folder>
-                        </Tree>
+                        <Tree className='tree' data={treeData} 
+                        parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+const treeData = [
+    {
+        id: 1, // ID's will be set when reading data from backend
+        type: 'folder',
+        name: 'Classes',
+        children: [
+            {
+                id: 2,
+                type: 'folder',
+                name: 'Data Structures & Algorithms',
+                children: [
+                    {
+                        id: 3,
+                        type: 'document',
+                        name: 'Lecture 1',
+                        children: [],
+                    },
+                    {
+                        id: 4,
+                        type: 'document',
+                        name: 'Lecture 2',
+                        children: [],
+                    }
+                ]
+            },
+            {
+                id: 5,
+                type: 'folder',
+                name: 'Software Requirements',
+                children: [
+                    {
+                        id: 6,
+                        type: 'document',
+                        name: 'Lecture 1',
+                        children: [],
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 7,
+        type: 'folder',
+        name: 'Notes',
+        children: [
+            {
+                id: 8,
+                type: 'folder',
+                name: 'Book Notes',
+                children: [
+                    {
+                        id: 9,
+                        type: 'document',
+                        name: 'Chapter 1',
+                        children: [],
+                    }
+                ]
+            },
+        ]
+    }
+]
 
 export default Sidebar
