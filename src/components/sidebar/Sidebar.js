@@ -5,6 +5,14 @@ import Tree from './Tree'
 import Document from './Document'
 
 class Sidebar extends Component {
+    state = {
+        highlightId: -1,
+    }
+
+    highlightDocument = (id) => {
+        this.setState({highlightId: id})
+    }
+
     render() {
         return (
             <div className='sidebar'>
@@ -15,17 +23,31 @@ class Sidebar extends Component {
                         <Tree className='tree'>
                             <Folder name='Classes'>
                                 <Folder name='Data Structures & Algorithms'>
-                                    <Document name='Lecture 1'/>
-                                    <Document name='Lecture 2'/>
-                                    <Document name='Lecture 3'/>
+                                    <Document name='Lecture 1' id={1} 
+                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+
+                                    <Document name='Lecture 2' id={2} 
+                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+
+                                    <Document name='Lecture 3' id={3} 
+                                    parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+
                                 </Folder>
-                            </Folder>
-                            <Folder name='Software Requirements'>
-                                <Document name='Lecture 1'/>
-                                <Document name='Lecture 2'/>
-                                <Document name='Lecture 3'/>
-                                <Folder name='Another Folder'>
-                                    <Document name='Lecture 3'/>
+                                <Folder name='Software Requirements'>
+                                    <Folder name='Lectures'>
+                                        <Document name='Lecture 1' id={4}
+                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+
+                                        <Document name='Lecture 2' id={5}
+                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+
+                                        <Document name='Lecture 3' id={6}
+                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+                                    </Folder>
+                                    <Folder name='Assignments'>
+                                        <Document name='Assignment 1' id={7}
+                                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+                                    </Folder>
                                 </Folder>
                             </Folder>
                         </Tree>

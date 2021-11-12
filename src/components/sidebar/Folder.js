@@ -7,7 +7,6 @@ export class Folder extends Component {
     }
 
     setIsOpen = (b) => {
-        console.log('state changed to ' + b)
         this.setState({isOpen: b});
     }
 
