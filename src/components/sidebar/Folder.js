@@ -24,6 +24,7 @@ export class Folder extends Component {
     addDocument = () => {
         const childrenTemp = this.state.children;
         // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
+        // OR MAYBE A SINGLETON PATTERN TO STORE ID???
         childrenTemp.push(
             {
                 id: 1000,
