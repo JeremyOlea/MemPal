@@ -8,7 +8,7 @@ export class Home extends Component {
         return (
             <div className='flex-container'>
                 <Sidebar/>
-                <FillerText/>
+                {/* <FillerText/> */}
             </div>
         )
     }

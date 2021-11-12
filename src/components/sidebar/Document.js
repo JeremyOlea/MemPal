@@ -11,7 +11,7 @@ export class Document extends Component {
             onClick={() =>this.props.parentCallback(this.state.id)}>
                 <span>
                     {this.props.name}
-                    </span>
+                </span>
             </div>
         )
     }
