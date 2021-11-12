@@ -36,7 +36,7 @@ const treeData = [
             {
                 id: 2,
                 type: 'folder',
-                name: 'Data Structures & Algorithms',
+                name: 'Data Structures & Algorithms a sad a sa ads as ad asd a das dasd',
                 children: [
                     {
                         id: 3,

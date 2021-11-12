@@ -5,10 +5,6 @@ export class Document extends Component {
         id: this.props.id
     }
 
-    // componentDidUpdate() {
-    //     console.log('Updated: ' + this.props.isSelected)
-    // }
-
     render() {
         return (
             <div className={this.props.isSelected === this.props.id ? 'document isSelected' : 'document'}

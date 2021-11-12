@@ -38,7 +38,14 @@
 .folder {
     display: flex;
     align-items: center;
+}
+
+.folder-name {
     /* TODO: MAKE IT NOT WRAP */
+    flex: 8;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .folder-wrapper {
@@ -50,6 +57,25 @@
     user-select: none; /* Standard */
 }
 
+.folder:hover {
+    background-color: rgba(90, 145, 108, 0.171);
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.document:hover {
+    background-color: rgba(90, 145, 108, 0.171);
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.plus-icon {
+    opacity: 0.7;
+    flex: 1;
+}
+
 .tree {
     line-height: 1.5;
 }
@@ -57,8 +83,6 @@
 .document {
     padding-left: 20px;
     overflow: hidden;
-    border-radius: 7px;
-    margin-right: 10px;
 }
 
 .collapsible {
@@ -74,5 +98,7 @@
 }
 
 .isSelected {
-    background: rgba(90, 145, 108, 0.5);
+    background: rgba(90, 145, 108, 0.4) !important;
+    border-radius: 5px;
+    margin-right: 10px;
 }
