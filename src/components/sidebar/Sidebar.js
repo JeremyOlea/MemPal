@@ -16,7 +16,9 @@ class Sidebar extends Component {
             <div className='sidebar'>
                 <div className='sidebar-flex-container'>
                     <div className='profile-area'> User Profile </div>
-                    <div className='search-area'> Search Area </div>
+                    <div className='search-area'> 
+                        <input className='search-bar' type='text' placeholder='Search...'/>
+                    </div>
                     <div className='document-area'>
                         <Tree className='tree' data={treeData} 
                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>

@@ -7,7 +7,7 @@
     max-width: 290px;
     border-right: 1px solid;
     margin-right: 10px;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-right: 10px;
 }
 
@@ -20,13 +20,24 @@
 .profile-area {
     text-align: center;
     margin-top: 10px;
-    height: 60px;
+    height: 100px;
 }
 
 .search-area {
-    text-align: center;
-    height: 50px;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
     border-top: 1px solid #b8b8b8;
+}
+
+.search-bar {
+    /* margin-top: 10px; */
+    width: 90%;
+    height: 30px;
+    background-color: rgba(117, 117, 117, 0.089);
+    border: 1px solid;
 }
 
 .document-area {
@@ -38,6 +49,8 @@
 .folder {
     display: flex;
     align-items: center;
+    height: 2em;
+    line-height: 1.5em;
 }
 
 .folder-name {
@@ -83,6 +96,8 @@
 .document {
     padding-left: 20px;
     overflow: hidden;
+    height: 1.7em;
+    line-height: 1.5em;
 }
 
 .collapsible {
