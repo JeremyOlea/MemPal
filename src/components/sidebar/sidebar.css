@@ -58,6 +58,8 @@
 .document {
     padding-left: 20px;
     overflow: hidden;
+    border-radius: 7px;
+    margin-right: 10px;
 }
 
 .collapsible {
@@ -73,5 +75,5 @@
 }
 
 .isSelected {
-    background-color: aqua;
+    background: rgba(90, 145, 108, 0.5);
 }
