@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import DropdownMenu from './DropdownMenu'
+import NewDocumentButton from './NewDocumentButton'
 import './sidebar.css'
 import Tree from './Tree'
 
@@ -8,7 +10,7 @@ class Sidebar extends Component {
     }
 
     highlightDocument = (id) => {
-        this.setState({highlightId: id})
+        this.setState({highlightId: id});
     }
 
     render() {
@@ -22,6 +24,11 @@ class Sidebar extends Component {
                     <div className='document-area'>
                         <Tree className='tree' data={treeData} 
                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+                    </div>
+                    <div className='new-document-area'>
+                        <NewDocumentButton>
+                            <DropdownMenu></DropdownMenu>
+                        </NewDocumentButton>
                     </div>
                 </div>
             </div>
