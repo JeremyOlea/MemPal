@@ -33,10 +33,26 @@ export class NewDocumentButton extends Component {
         }
     }
 
+    createDocument = () => {
+        this.props.createDocument();
+        this.setState({isOpen: false});
+    }
+
+    createFolder = () => {
+        this.props.createFolder();
+        this.setState({isOpen: false});
+    }
+
     render() {
+        const childrenWithProps = React.cloneElement(this.props.children, 
+            { 
+                createDocument: this.createDocument,
+                createFolder: this.createFolder,
+            });
+
         return (
             <div ref={this.container}>
-                {this.state.isOpen && this.props.children}
+                {this.state.isOpen && childrenWithProps}
                 <div className='new-document-btn' onClick={() => this.setIsOpen(!this.state.isOpen)}>
                     <FiPlus className='new-document-plus'/>
                     New Document

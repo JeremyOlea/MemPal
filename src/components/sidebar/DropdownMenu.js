@@ -5,10 +5,10 @@ export class DropdownMenu extends Component {
     render() {
         return (
             <div className='dropdown'>
-                <DropdownItem>
+                <DropdownItem createElement={this.props.createDocument}>
                         New Document
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem createElement={this.props.createFolder}>
                         New Folder
                 </DropdownItem>
             </div>

@@ -7,10 +7,37 @@ import Tree from './Tree'
 class Sidebar extends Component {
     state = {
         highlightId: -1,
+        data: treeData,
     }
 
     highlightDocument = (id) => {
         this.setState({highlightId: id});
+    }
+
+    createDocument = () => {
+        const tempTreeData = this.state.data;
+        tempTreeData.push(
+            {
+                id: 1000, // change this later
+                type: 'document',
+                name: 'Untitled Document',
+                children: [],
+            }
+        );
+        this.setState({data: tempTreeData});
+    }
+
+    createFolder = () => {
+        const tempTreeData = this.state.data;
+        tempTreeData.push(
+            {
+                id: 1001, // change this later
+                type: 'folder',
+                name: 'Untitled Folder',
+                children: [],
+            }
+        );
+        this.setState({data: tempTreeData});
     }
 
     render() {
@@ -22,11 +49,12 @@ class Sidebar extends Component {
                         <input className='search-bar' type='text' placeholder='Search...'/>
                     </div>
                     <div className='document-area'>
-                        <Tree className='tree' data={treeData} 
+                        <Tree className='tree' data={this.state.data} 
                         parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
                     </div>
                     <div className='new-document-area'>
-                        <NewDocumentButton>
+                        <NewDocumentButton createDocument={this.createDocument}
+                                createFolder={this.createFolder}>
                             <DropdownMenu></DropdownMenu>
                         </NewDocumentButton>
                     </div>
