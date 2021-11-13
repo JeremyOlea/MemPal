@@ -18,7 +18,7 @@ class Sidebar extends Component {
         const tempTreeData = this.state.data;
         tempTreeData.push(
             {
-                id: 1000, // change this later
+                id: 1002, // change this later
                 type: 'document',
                 name: 'Untitled Document',
                 children: [],
@@ -73,7 +73,7 @@ const treeData = [
             {
                 id: 2,
                 type: 'folder',
-                name: 'Data Structures & Algorithms a sad a sa ads as ad asd a das dasd',
+                name: 'Data Structures & Algorithms',
                 children: [
                     {
                         id: 3,
