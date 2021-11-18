@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@hapi/hapi": "^20.2.1"
+    "@hapi/hapi": "^20.2.1",
+    "dotenv": "^10.0.0",
+    "mysql": "^2.18.1"
   }
 }
