@@ -23,6 +23,21 @@
     height: 100px;
 }
 
+.button-container {
+    height: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-in {
+    width: 100px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
 .search-area {
     /* background-color: red; */
     display: flex;

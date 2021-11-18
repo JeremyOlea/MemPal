@@ -44,7 +44,12 @@ class Sidebar extends Component {
         return (
             <div className='sidebar'>
                 <div className='sidebar-flex-container'>
-                    <div className='profile-area'> User Profile </div>
+                    <div className='profile-area'>
+                        <div className='button-container'>  
+                            <button className='sign-in' onClick={() => this.props.loginButtonOnClick(true)}>Login</button> 
+                            <button className='sign-in'>Sign up</button>
+                        </div>
+                    </div>
                     <div className='search-area'> 
                         <input className='search-bar' type='text' placeholder='Search...'/>
                     </div>
