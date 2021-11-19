@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './LoginPopup.css'
-import {API_ADDRESS} from'../../constants'
+import { API_ADDRESS } from '../../constants'
+import { FiX } from 'react-icons/fi'
 
 export class LoginPopup extends Component {
     state = {
@@ -47,16 +48,20 @@ export class LoginPopup extends Component {
         return (this.props.trigger) ? (
             <div className='login-outer'>
                 <div className='login-inner'>
-                    <h1>Login</h1>
-                    {/* <form className='login-form'> */}
-                        <span>Email</span>
-                        <input type='text' placeholder='Email' onChange={this.handleEmailChange}/>
-                        <span>Password</span>
-                        <input type='password' placeholder='Password' onChange={this.handlePasswordChange}/>
+                    <div className='login-flex'>
+                        <h1 className='login-header'>Login</h1>
+                        <span className='input-label'>Email</span>
+                        <input type='text' placeholder='Email' onChange={this.handleEmailChange}
+                            className='input-field'/>
+                        <span className='input-label'>Password</span>
+                        <input type='password' placeholder='Password' onChange={this.handlePasswordChange}
+                            className='input-field'/>
                         <button onClick={this.handleSubmit}>submit</button>
-                    {/* </form> */}
-                    <button className='close-btn'
-                            onClick={() => this.props.loginButtonOnClick(false)}>close</button>
+                        <FiX className='close-btn' 
+                            onClick={() => this.props.loginButtonOnClick(false)}
+                            size={25}/>
+                    </div>
+                    
                 </div>
             </div>
         ) : "";

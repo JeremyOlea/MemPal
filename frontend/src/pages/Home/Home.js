@@ -6,7 +6,7 @@ import './Home.css'
 
 export class Home extends Component {
     state = {
-        loginOpen: true,
+        loginOpen: false,
     }
 
     changeLoginPopupState = (b) => {
