@@ -14,6 +14,17 @@ const init = async() => {
         encoding: 'base64json'
     });
 
+    await server.register([
+        {
+          plugin: require('hapi-cors'),
+        },
+        {
+          plugin: require('hapi-auth-cookie'),
+          options: {}
+        },
+    ]);
+
+
     server.route(require('./routes'));
 
     await server.start();
