@@ -45,21 +45,5 @@ module.exports = [
                 return helper.badResponse(h, err);
             }
         }
-    },
-    {
-        method: 'GET',
-        path: '/api/authentication/example',
-        handler: (request, h) => {
-            data = 'hello world'
-            return helper.goodResponse(h, data);
-        }
-    },
-    {
-        method: 'POST',
-        path: '/api/authentication/postExample',
-        handler: (request, h) => {
-            data = request.payload.email;
-            return helper.goodResponse(h, data);
-        }
-    },
+    }
 ]
