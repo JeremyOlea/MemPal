@@ -1,1 +1,3 @@
-const secondaryColor = '0xFFFF3D3D'
+const API_ADDRESS='http://localhost:1234';
+
+module.exports = { API_ADDRESS };
