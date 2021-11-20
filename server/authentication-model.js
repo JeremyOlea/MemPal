@@ -15,7 +15,9 @@ const signup = async (Email, inputPassword) => {
     });
 
     if (!signupResults.affectedRows) throw new Error('Failed to sign up!');
-    return { User_ID: signupResults.insertId, isValid: true }
+    return { isValid: true, 
+            credentials: { User_ID: signupResults.insertId }
+        };
 }
 
 const login = async (inputEmail, inputPassword) => {

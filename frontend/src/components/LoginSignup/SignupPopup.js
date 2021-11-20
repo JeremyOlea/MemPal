@@ -3,7 +3,7 @@ import './SignupPopup.css'
 import { API_ADDRESS } from '../../constants'
 import { FiX } from 'react-icons/fi'
 
-export class LoginPopup extends Component {
+export class SignupPopup extends Component {
     state = {
         email: '',
         password: ''
@@ -22,6 +22,16 @@ export class LoginPopup extends Component {
         this.setState({password: event.target.value})
     }
 
+    afterLogin = (data) => {
+        if (data.isValid) {
+            const credentials = data.credentials;
+            localStorage.setItem('login', credentials);
+            this.props.loginCallback(credentials);
+        } else {
+            alert('Operation failed! Please try again later.');
+        }
+    }
+
     signupAuthentication = async (inputEmail, inputPassword) => {
         inputEmail = inputEmail.toLowerCase();
         try {
@@ -38,7 +48,7 @@ export class LoginPopup extends Component {
                 },
             });
             const data = await res.json();
-            console.log(data);
+            this.afterLogin(data);
           } catch (err) {
             alert('Login Failed! Please enter a valid username and password.');
           }
@@ -49,7 +59,7 @@ export class LoginPopup extends Component {
             <div className='signup-outer'>
                 <div className='signup-inner'>
                     <div className='signup-flex'>
-                        <h1 className='signup-header'>Login</h1>
+                        <h1 className='signup-header'>Sign up</h1>
                         <span className='input-label'>Email</span>
                         <input type='text' placeholder='Email' onChange={this.handleEmailChange}
                             className='input-field'/>
@@ -58,7 +68,7 @@ export class LoginPopup extends Component {
                             className='input-field'/>
                         <button onClick={this.handleSubmit}>submit</button>
                         <FiX className='close-btn' 
-                            onClick={() => this.props.signupButtonOnClick(false)}
+                            onClick={() => this.props.popupClose(false)}
                             size={25}/>
                     </div>
                     
@@ -68,4 +78,4 @@ export class LoginPopup extends Component {
     }
 }
 
-export default LoginPopup
+export default SignupPopup

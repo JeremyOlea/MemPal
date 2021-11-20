@@ -10,7 +10,6 @@ export class LoginPopup extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state);
         this.loginAuthentication(this.state.email, this.state.password);
     }
 
@@ -20,6 +19,16 @@ export class LoginPopup extends Component {
 
     handlePasswordChange = (event) => {
         this.setState({password: event.target.value})
+    }
+
+    afterLogin = (data) => {
+        if (data.isValid) {
+            const credentials = data.credentials;
+            localStorage.setItem('login', credentials);
+            this.props.loginCallback(credentials);
+        } else {
+            alert('Operation failed! Please try again later.');
+        }
     }
 
     loginAuthentication = async (inputEmail, inputPassword) => {
@@ -39,8 +48,10 @@ export class LoginPopup extends Component {
             });
             const data = await res.json();
             console.log(data);
+            this.afterLogin(data);
           } catch (err) {
             alert('Login Failed! Please enter a valid username and password.');
+            console.log(err);
           }
     }
 
@@ -58,7 +69,7 @@ export class LoginPopup extends Component {
                             className='input-field'/>
                         <button onClick={this.handleSubmit}>submit</button>
                         <FiX className='close-btn' 
-                            onClick={() => this.props.loginButtonOnClick(false)}
+                            onClick={() => this.props.popupClose(false)}
                             size={25}/>
                     </div>
                     
