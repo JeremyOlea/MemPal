@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
     "bcrypt": "^5.0.1",
