@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-// import FillerText from '../../components/FillerText'
 import LoginPopup from '../../components/LoginSignup/LoginPopup'
 import SignupPopup from '../../components/LoginSignup/SignupPopup'
 import Sidebar from '../../components/sidebar/Sidebar'
+import TextEditor from '../../components/TextEditor/TextEditor'
+// import FillerText from '../../components/FillerText'
 import './Home.css'
 
 export class Home extends Component {
@@ -39,6 +40,9 @@ export class Home extends Component {
                         loginButtonClicked={this.changeLoginPopupState}
                         signupButtonClicked={this.changeSignupPopupState}
                         logoutButtonClicked={this.userLogout}/>
+                    <div className='textEditor'>
+                        <TextEditor/>
+                    </div>
                     {/* <FillerText/> */}
                 </div>
                 <LoginPopup popupClose={this.changeLoginPopupState} 

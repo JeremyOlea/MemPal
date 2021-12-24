@@ -3,3 +3,7 @@
     flex-direction: row;
     /* background-color: rgb(243, 243, 243); */
 }
+
+.textEditor {
+    flex: 1;
+}
