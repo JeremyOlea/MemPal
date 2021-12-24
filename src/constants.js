@@ -1,1 +1,0 @@
-const secondaryColor = '0xFFFF3D3D'

@@ -41,14 +41,29 @@ class Sidebar extends Component {
     }
 
     render() {
+
+        let profileButtons;
+        if (this.props.isLoggedIn) {
+            profileButtons = <div className='logged-in-user-container'>  
+                                <span>Welcome to MemPal!</span>
+                                <button className='logout-btn'
+                                    onClick={() => this.props.logoutButtonClicked()}>logout</button> 
+                            </div>
+        } else {
+            profileButtons = <div className='button-container'>  
+                                <button className='sign-in' 
+                                    onClick={() => this.props.loginButtonClicked(true)}>Login</button> 
+                                <button className='sign-in'
+                                    onClick={() => this.props.signupButtonClicked(true)}>Sign up</button>
+                            </div>
+        }
+
+
         return (
             <div className='sidebar'>
                 <div className='sidebar-flex-container'>
                     <div className='profile-area'>
-                        <div className='button-container'>  
-                            <button className='sign-in' onClick={() => this.props.loginButtonOnClick(true)}>Login</button> 
-                            <button className='sign-in'>Sign up</button>
-                        </div>
+                        {profileButtons}
                     </div>
                     <div className='search-area'> 
                         <input className='search-bar' type='text' placeholder='Search...'/>
