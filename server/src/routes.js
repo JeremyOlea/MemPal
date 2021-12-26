@@ -1,6 +1,6 @@
 'use strict';
 const authentication = require('./authentication-controller');
 const example = require('./example-endpoints');
-const folder = require('./folder-controller')
+const content = require('./content-controller')
 
-module.exports = [].concat(authentication, example, folder);
+module.exports = [].concat(authentication, example, content);
