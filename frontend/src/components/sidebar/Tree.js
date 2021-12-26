@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Folder from './NewFolder'
+import Folder from './Folder'
 import Document from './Document'
 
 export class Tree extends Component {

@@ -8,31 +8,8 @@ export class NewDocumentButton extends Component {
         isOpen: false,
     }
 
-    container = React.createRef();
-
-    componentWillUnmount() {
-        document.removeEventListener("mousedown", this.handleClickOutside);
-    }
-
-    handleClickOutside = (event) => {
-        if (
-            this.container.current &&
-            !this.container.current.contains(event.target)
-          ) {
-            this.setState({
-              isOpen: false,
-            });
-          }
-    }
-
     setIsOpen = (b) => {
         this.setState({isOpen: b});
-
-        if (b) {
-            document.addEventListener("mousedown", this.handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", this.handleClickOutside);
-        }
     }
 
     createDocument = () => {
@@ -49,7 +26,7 @@ export class NewDocumentButton extends Component {
         return (
             <div ref={this.container}>
                 {this.state.isOpen ? 
-                <DropdownMenu>
+                <DropdownMenu parentCallback={this.setIsOpen}>
                     <DropdownItem action={this.createDocument}>New Document</DropdownItem>
                     <DropdownItem action={this.createFolder}>New Folder</DropdownItem>
                 </DropdownMenu> : ''}

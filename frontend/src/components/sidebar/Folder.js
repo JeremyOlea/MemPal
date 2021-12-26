@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { FiChevronRight, FiChevronDown, FiPlus} from "react-icons/fi"
 import Tree from './Tree'
+import DropdownItem from './DropdownItem'
+import DropdownMenu from './DropdownMenu'
 
 export class Folder extends Component {
     state = {
@@ -8,6 +10,9 @@ export class Folder extends Component {
         isHovering: false,
         children: this.props.child,
         depth: this.props.depth,
+        openContextMenu: false,
+        pageX: 0,
+        pageY: 0
     }
 
     setIsOpen = (b) => {
@@ -22,7 +27,7 @@ export class Folder extends Component {
         this.setState({isHovering: false})
     }
 
-    addDocument = () => {
+    createDocument = () => {
         const childrenTemp = this.state.children;
         // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
         // OR MAYBE A SINGLETON PATTERN TO STORE ID???
@@ -34,12 +39,16 @@ export class Folder extends Component {
                 children: [],
             }
         )
-        this.setState({children: childrenTemp})
-
-        this.setIsOpen(true)
+        this.setState(
+            {
+                children: childrenTemp,
+                isOpen: true,
+                openContextMenu: false,
+                isHovering: false
+            });
     }
 
-    addFolder = () => {
+    createFolder = () => {
         const childrenTemp = this.state.children;
         // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
         // OR MAYBE A SINGLETON PATTERN TO STORE ID???
@@ -51,9 +60,21 @@ export class Folder extends Component {
                 children: [],
             }
         )
-        this.setState({children: childrenTemp})
+        this.setState(
+            {
+                children: childrenTemp,
+                isOpen: true,
+                openContextMenu: false,
+                isHovering: false
+            });
+    }
 
-        this.setIsOpen(true)
+    toggleContextMenu = (e) => {
+        this.setState(
+            {openContextMenu: !this.state.openContextMenu,
+            pageX: e.pageX - 150, // subtract width of context menu
+            pageY: e.pageY + 10 // add height of context menu
+            });
     }
 
     render() {
@@ -62,10 +83,15 @@ export class Folder extends Component {
                 <div className='folder' 
                 onMouseEnter={this.handleMouseOver}
                 onMouseLeave={this.handleMouseOut}>
+                    {this.state.openContextMenu ? 
+                    <DropdownMenu xPos={this.state.pageX} yPos={this.state.pageY} parentCallback={this.toggleContextMenu}>
+                        <DropdownItem action={this.createDocument}>New Document</DropdownItem>
+                        {this.state.depth < 2 && <DropdownItem action={this.createFolder}>New Folder</DropdownItem>}
+                    </DropdownMenu> : ''}
                     {this.state.isOpen ? <FiChevronDown onClick={() => this.setIsOpen(!this.state.isOpen)}/>
                      : <FiChevronRight onClick={() => this.setIsOpen(!this.state.isOpen)}/>}
                     <span className='folder-name' onClick={() => this.setIsOpen(!this.state.isOpen)}>{this.props.name}</span>
-                    {/* {this.state.isHovering && <FiPlus className='plus-icon' onClick={this.addFolder}/>} */}
+                    {this.state.isHovering && <FiPlus className='plus-icon' onClick={this.toggleContextMenu}/>}
                 </div>
                 <div className={this.state.isOpen ? 'collapsible open' : 'collapsible closed'}>
                     <Tree data={this.state.children}

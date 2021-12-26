@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { FiChevronRight, FiChevronDown, FiPlus} from "react-icons/fi"
 import Tree from './Tree'
+import useFolderRightClickMenu from './useFolderRightClickMenuHooks';
 
 export default function NewFolder({key, name, child, parentCallback, isSelected, depth}) {
     const [isOpen, setIsOpen] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
     const [children, setChildren] = useState(child);
+    const {x, y, showMenu} = useFolderRightClickMenu();
 
     const addDocument = () => {
         const childrenTemp = children;
