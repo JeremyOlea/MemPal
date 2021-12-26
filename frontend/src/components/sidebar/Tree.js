@@ -12,7 +12,8 @@ export class Tree extends Component {
                             name={item.name} 
                             child={item.children}
                             parentCallback={this.props.parentCallback}
-                            isSelected={this.props.isSelected}/>
+                            isSelected={this.props.isSelected}
+                            depth={this.props.depth}/>
                     )
                 }
                 else if (item.type === 'document') {

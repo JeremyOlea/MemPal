@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {FiPlus} from "react-icons/fi"
+import DropdownItem from './DropdownItem'
+import DropdownMenu from './DropdownMenu'
 
 export class NewDocumentButton extends Component {
     state = {
@@ -44,15 +46,13 @@ export class NewDocumentButton extends Component {
     }
 
     render() {
-        const childrenWithProps = React.cloneElement(this.props.children, 
-            { 
-                createDocument: this.createDocument,
-                createFolder: this.createFolder,
-            });
-
         return (
             <div ref={this.container}>
-                {this.state.isOpen && childrenWithProps}
+                {this.state.isOpen ? 
+                <DropdownMenu>
+                    <DropdownItem action={this.createDocument}>New Document</DropdownItem>
+                    <DropdownItem action={this.createFolder}>New Folder</DropdownItem>
+                </DropdownMenu> : ''}
                 <div className='new-document-btn' onClick={() => this.setIsOpen(!this.state.isOpen)}>
                     <FiPlus className='new-document-plus'/>
                     New Document

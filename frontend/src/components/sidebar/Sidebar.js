@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DropdownMenu from './DropdownMenu'
 import NewDocumentButton from './NewDocumentButton'
 import './sidebar.css'
 import Tree from './Tree'
@@ -70,13 +69,12 @@ class Sidebar extends Component {
                     </div>
                     <div className='document-area'>
                         <Tree className='tree' data={this.state.data} 
-                        parentCallback={this.highlightDocument} isSelected={this.state.highlightId}/>
+                        parentCallback={this.highlightDocument} isSelected={this.state.highlightId}
+                        depth={1}/>
                     </div>
                     <div className='new-document-area'>
                         <NewDocumentButton createDocument={this.createDocument}
-                                createFolder={this.createFolder}>
-                            <DropdownMenu></DropdownMenu>
-                        </NewDocumentButton>
+                            createFolder={this.createFolder}/>
                     </div>
                 </div>
             </div>

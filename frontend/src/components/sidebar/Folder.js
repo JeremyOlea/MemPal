@@ -7,6 +7,7 @@ export class Folder extends Component {
         isOpen: false,
         isHovering: false,
         children: this.props.child,
+        depth: this.props.depth,
     }
 
     setIsOpen = (b) => {
@@ -38,6 +39,23 @@ export class Folder extends Component {
         this.setIsOpen(true)
     }
 
+    addFolder = () => {
+        const childrenTemp = this.state.children;
+        // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
+        // OR MAYBE A SINGLETON PATTERN TO STORE ID???
+        childrenTemp.push(
+            {
+                id: 1000,
+                type: 'folder',
+                name: 'Untitled Folder',
+                children: [],
+            }
+        )
+        this.setState({children: childrenTemp})
+
+        this.setIsOpen(true)
+    }
+
     render() {
         return (
             <div className='folder-wrapper'>
@@ -47,12 +65,13 @@ export class Folder extends Component {
                     {this.state.isOpen ? <FiChevronDown onClick={() => this.setIsOpen(!this.state.isOpen)}/>
                      : <FiChevronRight onClick={() => this.setIsOpen(!this.state.isOpen)}/>}
                     <span className='folder-name' onClick={() => this.setIsOpen(!this.state.isOpen)}>{this.props.name}</span>
-                    {this.state.isHovering && <FiPlus className='plus-icon' onClick={this.addDocument}/>}
+                    {/* {this.state.isHovering && <FiPlus className='plus-icon' onClick={this.addFolder}/>} */}
                 </div>
                 <div className={this.state.isOpen ? 'collapsible open' : 'collapsible closed'}>
                     <Tree data={this.state.children}
                         parentCallback={this.props.parentCallback} 
-                        isSelected={this.props.isSelected}/>
+                        isSelected={this.props.isSelected}
+                        depth={this.state.depth + 1}/>
                 </div>
             </div>
         )
