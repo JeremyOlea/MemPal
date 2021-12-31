@@ -3,9 +3,13 @@ import { FiChevronRight, FiChevronDown, FiPlus} from "react-icons/fi"
 import Tree from './Tree'
 import DropdownItem from './DropdownItem'
 import DropdownMenu from './DropdownMenu'
+import { API_ADDRESS } from '../../constants'
 
 export class Folder extends Component {
     state = {
+        user: localStorage.getItem('login'),
+        id: this.props.id,
+        parentId: this.props.parentId,
         isOpen: false,
         isHovering: false,
         children: this.props.child,
@@ -27,46 +31,131 @@ export class Folder extends Component {
         this.setState({isHovering: false})
     }
 
-    createDocument = () => {
-        const childrenTemp = this.state.children;
-        // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
-        // OR MAYBE A SINGLETON PATTERN TO STORE ID???
-        childrenTemp.push(
-            {
-                id: 1000,
-                type: 'document',
-                name: 'Untitled Document',
-                children: [],
-            }
-        )
-        this.setState(
-            {
-                children: childrenTemp,
-                isOpen: true,
-                openContextMenu: false,
-                isHovering: false
+    afterCreateDocument = (data, doc_name) => {
+        if (data.isValid) {
+            const childrenTemp = this.state.children;
+            childrenTemp.push(
+                {
+                    id: data.content_ID,
+                    type: 'document',
+                    name: doc_name,
+                    children: [],
+                }
+            )
+            this.setState(
+                {
+                    children: childrenTemp,
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
+                });
+        } else {
+            alert('Operation failed! Please try again later.');
+            this.setState(
+                {
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
             });
+        }
     }
 
-    createFolder = () => {
-        const childrenTemp = this.state.children;
-        // THIS SHOULD BE DONE FROM DATABASE TO CREATE NEW UNIQUE ID
-        // OR MAYBE A SINGLETON PATTERN TO STORE ID???
-        childrenTemp.push(
-            {
-                id: 1000,
-                type: 'folder',
-                name: 'Untitled Folder',
-                children: [],
-            }
-        )
-        this.setState(
-            {
-                children: childrenTemp,
-                isOpen: true,
-                openContextMenu: false,
-                isHovering: false
+    createDocument = async () => {
+        const doc_name = 'Untitled Document';
+        const parent_id = this.state.id;
+        const user_id = this.state.user;
+        if (user_id == null) return;
+
+        try {
+            const res = await fetch(`${API_ADDRESS}/api/content/addDocument`, {
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify({
+                    parent_id: parent_id,
+                    user_id: user_id,
+                    name: doc_name,
+                    data: '' // Change this to quill obj
+                }),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
+            const data = await res.json();
+            this.afterCreateDocument(data, doc_name);
+        } catch (err) {
+            alert('Failed to create document.');
+            console.log(err);
+            this.setState(
+                {
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
+            });
+        }
+    }
+
+    createFolder = async () => {
+        const folder_name = 'Untitled Folder';
+        const parent_id = this.state.id;
+        const user_id = this.state.user;
+        if (user_id == null) return;
+
+        try {
+            const res = await fetch(`${API_ADDRESS}/api/content/addFolder`, {
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify({
+                    parent_id: parent_id,
+                    user_id: user_id,
+                    name: folder_name
+                }),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await res.json();
+            this.afterCreateFolder(data, folder_name);
+        } catch (err) {
+            alert('Failed to create folder.');
+            console.log(err);
+            this.setState(
+                {
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
+            });
+        }
+    }
+
+    afterCreateFolder = (data, folder_name) => {
+        if (data.isValid) {
+            const childrenTemp = this.state.children;
+            childrenTemp.push(
+                {
+                    id: data.content_ID,
+                    type: 'folder',
+                    name: folder_name,
+                    children: [],
+                }
+            )
+            this.setState(
+                {
+                    children: childrenTemp,
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
+                });
+        } else {
+            alert('Operation failed! Please try again later.');
+            this.setState(
+                {
+                    isOpen: true,
+                    openContextMenu: false,
+                    isHovering: false
+                });
+        }
     }
 
     toggleContextMenu = (e) => {
@@ -97,7 +186,8 @@ export class Folder extends Component {
                     <Tree data={this.state.children}
                         parentCallback={this.props.parentCallback} 
                         isSelected={this.props.isSelected}
-                        depth={this.state.depth + 1}/>
+                        depth={this.state.depth + 1}
+                        parentId={this.state.id}/>
                 </div>
             </div>
         )

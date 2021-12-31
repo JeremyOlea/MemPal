@@ -5,12 +5,14 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import TextEditor from '../../components/TextEditor/TextEditor'
 // import FillerText from '../../components/FillerText'
 import './Home.css'
+import { useParams } from 'react-router-dom'
 
 export class Home extends Component {
     state = {
         user: localStorage.getItem('login'),
         loginOpen: false,
-        signupOpen: false
+        signupOpen: false,
+        documentId: this.props.id
     }
 
     changeLoginPopupState = (b) => {
@@ -43,7 +45,6 @@ export class Home extends Component {
                     <div className='textEditor'>
                         <TextEditor/>
                     </div>
-                    {/* <FillerText/> */}
                 </div>
                 <LoginPopup popupClose={this.changeLoginPopupState} 
                     trigger={this.state.loginOpen && !this.state.user}

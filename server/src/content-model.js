@@ -12,7 +12,7 @@ const createNewFolder = async (Parent_ID, User_ID, Name) => {
 
     if (!queryResult.affectedRows) throw new Error('Failed to create folder!');
     return { isValid: true, 
-            credentials: { content_ID: queryResult.insertId }
+            content_ID: queryResult.insertId
     };
 }
 
@@ -42,7 +42,7 @@ const createNewDocument = async (Parent_ID, User_ID, Name, Data) => {
 
     if (!queryResult.affectedRows) throw new Error('Failed to create document!');
     return { isValid: true, 
-            credentials: { content_ID: queryResult.insertId }
+            content_ID: queryResult.insertId
     };
 }
 

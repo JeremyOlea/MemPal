@@ -8,6 +8,7 @@
     "dotenv": "^10.0.0",
     "hapi-auth-cookie": "^10.0.0",
     "hapi-cors": "^1.0.3",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "socket.io": "^4.4.0"
   }
 }

@@ -24,7 +24,7 @@ export class SignupPopup extends Component {
 
     afterLogin = (data) => {
         if (data.isValid) {
-            const credentials = data.credentials;
+            const credentials = data.credentials.User_ID;
             localStorage.setItem('login', credentials);
             this.props.loginCallback(credentials);
         } else {

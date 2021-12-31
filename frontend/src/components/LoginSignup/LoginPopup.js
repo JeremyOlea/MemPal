@@ -23,7 +23,7 @@ export class LoginPopup extends Component {
 
     afterLogin = (data) => {
         if (data.isValid) {
-            const credentials = data.credentials;
+            const credentials = data.credentials.User_ID;
             localStorage.setItem('login', credentials);
             this.props.loginCallback(credentials);
         } else {
@@ -47,7 +47,6 @@ export class LoginPopup extends Component {
                 },
             });
             const data = await res.json();
-            console.log(data);
             this.afterLogin(data);
           } catch (err) {
             alert('Login Failed! Please enter a valid username and password.');
