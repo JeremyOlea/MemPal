@@ -3,17 +3,56 @@ import LoginPopup from '../../components/LoginSignup/LoginPopup'
 import SignupPopup from '../../components/LoginSignup/SignupPopup'
 import Sidebar from '../../components/sidebar/Sidebar'
 import TextEditor from '../../components/TextEditor/TextEditor'
-// import FillerText from '../../components/FillerText'
 import './Home.css'
-import { useParams } from 'react-router-dom'
+import { API_ADDRESS } from '../../constants'
 
 export class Home extends Component {
     state = {
         user: localStorage.getItem('login'),
         loginOpen: false,
         signupOpen: false,
-        documentId: this.props.id
+        documentId: this.props.id,
+        content: [],
     }
+
+    async componentDidMount() {
+        if (this.state.user == null) {
+            this.setState({content: []});
+            return;
+        }
+
+        try {
+            let res = await fetch(
+                `${API_ADDRESS}/api/content/getAllContent?user_id=${this.state.user}`, {
+                    mode: 'cors',
+                });
+            const treeData = await res.json();
+            this.setState({content: treeData['result']});
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async componentDidUpdate(prevProps, prevState) {
+        if(prevState.user !== this.state.user) {
+            if (this.state.user == null) {
+                this.setState({content: []});
+                return;
+            }
+    
+            try {
+                let res = await fetch(
+                    `${API_ADDRESS}/api/content/getAllContent?user_id=${this.state.user}`, {
+                        mode: 'cors',
+                    });
+                const treeData = await res.json();
+                this.setState({content: treeData['result']});
+            } catch(err) {
+                console.log(err);
+            }
+        }
+    }
+
 
     changeLoginPopupState = (b) => {
         this.setState({loginOpen: b});
@@ -41,7 +80,8 @@ export class Home extends Component {
                     <Sidebar isLoggedIn={this.state.user} 
                         loginButtonClicked={this.changeLoginPopupState}
                         signupButtonClicked={this.changeSignupPopupState}
-                        logoutButtonClicked={this.userLogout}/>
+                        logoutButtonClicked={this.userLogout}
+                        treeData={this.state.content}/>
                     <div className='textEditor'>
                         <TextEditor/>
                     </div>

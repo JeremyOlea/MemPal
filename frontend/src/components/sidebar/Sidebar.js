@@ -6,9 +6,15 @@ import { API_ADDRESS } from '../../constants'
 
 class Sidebar extends Component {
     state = {
-        user: localStorage.getItem('login'),
+        user: this.props.isLoggedIn,
         highlightId: -1,
-        data: [],
+        data: this.props.treeData,
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.treeData !== prevProps.treeData) {
+            this.setState({data: this.props.treeData});
+        }
     }
 
     highlightDocument = (id) => {
@@ -27,14 +33,12 @@ class Sidebar extends Component {
                 }
             )
             this.setState({data: tempTreeData});
-            console.log(this.state.data);
         } else {
             alert('Operation failed! Please try again later.');
         }
     }
 
     createDocument = async () => {
-        console.log('hello');
         const doc_name = 'Untitled Document';
         const parent_id = null;
         const user_id = this.state.user;
@@ -142,7 +146,6 @@ class Sidebar extends Component {
     // }
 
     render() {
-
         let profileButtons;
         if (this.props.isLoggedIn) {
             profileButtons = <div className='logged-in-user-container'>  

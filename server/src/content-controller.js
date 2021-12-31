@@ -110,4 +110,19 @@ module.exports = [
             }
         }
     },
+    {
+        method: 'GET',
+        path: '/api/content/getAllContent',
+        handler: async function (request, h) {
+            try {
+                //params needed
+                const user_id = request.query.user_id;
+                const res = await contentModel.getAllContent(user_id)
+                return helper.goodResponse(h, res);
+            } catch (err) {
+                return helper.badResponse(h, err);
+            }
+        }
+    },
+    
 ]

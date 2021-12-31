@@ -71,6 +71,51 @@ const deleteDocument = async (Document_ID) => {
         `DELETE FROM DOCUMENT WHERE Document_ID=?`, Document_ID);
 }
 
+const getAllContent = async (User_ID) => {
+    const res_docs = await db.query(
+        `SELECT * FROM DOCUMENT WHERE User_ID=?`, User_ID
+    );
+
+    const res_folders = await db.query(
+        `SELECT * FROM FOLDER WHERE User_ID=?`, User_ID
+    );
+    
+    let result = [];
+    createTreeData(result, null, res_docs, res_folders);
+    return { result };
+}
+
+const createTreeData = (result, parent_id, res_docs, res_folders) => {
+    for(let i = 0; i < res_docs.length; i++) {
+        let doc = res_docs[i];
+        if (doc['Parent_ID'] == parent_id) {
+            result.push({
+                id: doc['Document_ID'],
+                parent_id: doc['Parent_ID'],
+                type: 'document',
+                name: doc['Name'],
+                children: [],
+            });
+        }
+    }
+
+    for(let i = 0; i < res_folders.length; i++) {
+        let folder = res_folders[i];
+        if (folder['Parent_ID'] == parent_id) {
+            let folder_obj = {
+                id: folder['Folder_ID'],
+                parent_id: folder['Parent_ID'],
+                type: 'folder',
+                name: folder['Name'],
+            };
+            let children = [];
+            createTreeData(children, folder['Folder_ID'], res_docs, res_folders);
+            folder_obj['children'] = children
+            result.push(folder_obj);
+        }
+    }
+}
+
 module.exports = { createNewFolder, editFolderName, 
     createNewDocument, updateDocumentData, editDocumentName,
-    deleteFolder, deleteDocument };
+    deleteFolder, deleteDocument, getAllContent };
