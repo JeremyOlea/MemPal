@@ -17,7 +17,7 @@ class Sidebar extends Component {
         }
     }
 
-    highlightDocument = (id) => {
+    documentSelected = (id) => {
         this.setState({highlightId: id});
     }
 
@@ -174,7 +174,7 @@ class Sidebar extends Component {
                     </div>
                     <div className='document-area'>
                         <Tree className='tree' data={this.state.data} 
-                        parentCallback={this.highlightDocument} isSelected={this.state.highlightId}
+                        parentCallback={this.documentSelected} isSelected={this.state.highlightId}
                         depth={1} parentId={null}/>
                     </div>
                     <div className='new-document-area'>

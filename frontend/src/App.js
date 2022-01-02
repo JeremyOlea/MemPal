@@ -12,7 +12,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/' render={() => <Redirect to={`/document/${uuidV4()}`}/>}/>
+        {/* <Route exact path='/' render={() => <Redirect to={`/document/${uuidV4()}`}/>}/> */}
+        <Route exact path='/' render={() => <Home/>}/>
         <Route path='/document/:id' render={({ match }) => <Home id={match.params.id}/>}/>
       </Switch>
     </Router>

@@ -83,7 +83,7 @@ export class Home extends Component {
                         logoutButtonClicked={this.userLogout}
                         treeData={this.state.content}/>
                     <div className='textEditor'>
-                        <TextEditor/>
+                        <TextEditor documentId={this.state.documentId}/>
                     </div>
                 </div>
                 <LoginPopup popupClose={this.changeLoginPopupState} 

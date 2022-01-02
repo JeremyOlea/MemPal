@@ -42,17 +42,19 @@ const socketInit = async() => {
     io.on('connection', socket => {
         console.log('connected to socket');
         socket.on('get-document', documentId => {
-            const data = ""
+            // const data = { ops: [ { insert: '\n' } ]};
+            const data = '';
             socket.join(documentId);
             socket.emit('load-document', data);
             
             socket.on('send-changes', delta => {
-                console.log(delta);
+                // console.log(delta);
                 socket.broadcast.to(documentId).emit('receive-changes', delta)
             });
 
             socket.on('save-document', async data => {
-                await updateDocumentData(documentId, { data });
+                // await updateDocumentData(documentId, { data });
+                console.log('saving...');
             });
         });
     });
@@ -64,4 +66,4 @@ process.on('unhandledRejection', (err) => {
 });
 
 init();
-// socketInit();
+socketInit();
