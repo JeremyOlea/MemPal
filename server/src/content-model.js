@@ -46,6 +46,19 @@ const createNewDocument = async (Parent_ID, User_ID, Name, Data) => {
     };
 }
 
+const getDocumentById = async (Document_ID) => {
+    const queryResult = await db.query(
+        `SELECT * FROM DOCUMENT
+        WHERE Document_ID=?`, Document_ID);
+    
+    if (queryResult.length == 0) {
+        return '';
+    }
+
+    const res = JSON.parse(queryResult[0]['Data']);
+    return res['data'];
+}
+
 const updateDocumentData = async (Document_ID, Data) => {
     const queryResult = await db.query(
         `UPDATE DOCUMENT
@@ -118,4 +131,4 @@ const createTreeData = (result, parent_id, res_docs, res_folders) => {
 
 module.exports = { createNewFolder, editFolderName, 
     createNewDocument, updateDocumentData, editDocumentName,
-    deleteFolder, deleteDocument, getAllContent };
+    deleteFolder, deleteDocument, getAllContent, getDocumentById };

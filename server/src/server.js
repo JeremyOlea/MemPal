@@ -1,7 +1,7 @@
 'use strict'; // make sure we don't actually make any global variables
 
 const Hapi = require('@hapi/hapi');
-const { updateDocumentData } = require('./content-model');
+const { updateDocumentData, getDocumentById } = require('./content-model');
 const io = require('socket.io')(3001, {
     cors: {
         origin: 'http://localhost:3000',
@@ -41,20 +41,20 @@ const init = async() => {
 const socketInit = async() => {
     io.on('connection', socket => {
         console.log('connected to socket');
-        socket.on('get-document', documentId => {
-            // const data = { ops: [ { insert: '\n' } ]};
-            const data = '';
+        socket.on('get-document', async documentId => {
+            let data = await getDocumentById(documentId);
+            data = JSON.parse(data)
             socket.join(documentId);
             socket.emit('load-document', data);
             
             socket.on('send-changes', delta => {
-                // console.log(delta);
                 socket.broadcast.to(documentId).emit('receive-changes', delta)
             });
 
             socket.on('save-document', async data => {
-                // await updateDocumentData(documentId, { data });
                 console.log('saving...');
+                data = JSON.stringify(data);
+                await updateDocumentData(documentId, JSON.stringify({ data }));
             });
         });
     });

@@ -12,10 +12,6 @@ export default function TextEditor({ documentId }) {
     const [socket, setSocket] = useState();
     const [quill, setQuill] = useState();
 
-    useEffect(() => {
-        console.log('update')
-    }, [documentId])
-
     // handle saving documents
     useEffect(() => {
         if (socket == null && quill == null) return;
