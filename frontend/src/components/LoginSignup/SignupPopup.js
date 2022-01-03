@@ -10,7 +10,6 @@ export class SignupPopup extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state);
         this.signupAuthentication(this.state.email, this.state.password);
     }
 
